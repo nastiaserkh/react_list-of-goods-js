@@ -38,10 +38,18 @@ function getPreparedGoods(goods, { sortField, reversed }) {
   }
 
   if (reversed) {
-    preparedGoods = preparedGoods.toReversed();
+    preparedGoods.reverse();
   }
 
   return preparedGoods;
+}
+
+function displayReset(visibleArray) {
+  for (let i = 0; i < visibleArray.length; i += 1) {
+    if (visibleArray[i] !== goodsFromServer[i]) return false;
+  }
+
+  return true;
 }
 
 export const App = () => {
@@ -86,7 +94,7 @@ export const App = () => {
           Reverse
         </button>
 
-        {(sortField !== '' || reversed) && (
+        {!displayReset(visibleGoods) && (
           <button
             type="button"
             className={classNames('button', 'is-danger', {
