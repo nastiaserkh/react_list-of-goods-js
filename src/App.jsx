@@ -3,6 +3,9 @@ import './App.scss';
 import { useState } from 'react';
 import classNames from 'classnames';
 
+const SORT_FIELD_NAME = 'name';
+const SORT_FIELD_LENGTH = 'length';
+
 export const goodsFromServer = [
   'Dumplings',
   'Carrot',
@@ -22,10 +25,10 @@ function getPreparedGoods(goods, { sortField, reversed }) {
   if (sortField) {
     preparedGoods.sort((good1, good2) => {
       switch (sortField) {
-        case 'name':
+        case SORT_FIELD_NAME:
           return good1.localeCompare(good2);
 
-        case 'length':
+        case SORT_FIELD_LENGTH:
           return good1.length - good2.length;
 
         default:
@@ -56,9 +59,9 @@ export const App = () => {
         <button
           type="button"
           className={classNames('button', 'is-info', {
-            'is-light': sortField !== 'name',
+            'is-light': sortField !== SORT_FIELD_NAME,
           })}
-          onClick={() => setSortField('name')}
+          onClick={() => setSortField(SORT_FIELD_NAME)}
         >
           Sort alphabetically
         </button>
@@ -66,9 +69,9 @@ export const App = () => {
         <button
           type="button"
           className={classNames('button', 'is-success', {
-            'is-light': sortField !== 'length',
+            'is-light': sortField !== SORT_FIELD_LENGTH,
           })}
-          onClick={() => setSortField('length')}
+          onClick={() => setSortField(SORT_FIELD_LENGTH)}
         >
           Sort by length
         </button>
